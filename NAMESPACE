@@ -1,0 +1,56 @@
+#  Calling the dynamic library.
+useDynLib(reComBat-seq, .registration=TRUE, .fixes=".cxx_")
+
+#  All functions exported other than those starting with "."
+exportPattern("^[^\\.]")
+
+exportClasses("DGEList","DGEExact","DGEGLM","DGELRT","TopTags")
+exportMethods("show")
+
+import(methods)
+importFrom("graphics", abline, axis, curve, grid, legend,
+           lines, mtext, plot, points, smoothScatter, title,
+           par, polygon)
+importFrom("stats", approxfun, chisq.test, 
+           coefficients, dbinom, dnbinom, dnorm, fitted, hat,
+           integrate, lm.fit, lm.wfit, lowess, median, model.matrix,
+           optim, optimize, p.adjust, pbeta, pbinom,
+           pchisq, pf, pgamma, pnbinom, pnorm, predict,
+           pt, qbeta, qf, qgamma, qnorm, qqnorm, quantile,
+           rbinom, rmultinom, runif, uniroot)
+importFrom("utils", getFromNamespace, head, read.delim, read.table,
+           tail, write.table)
+if( tools:::.OStype() == "windows" ) importFrom("utils", "winMenuAddItem")
+
+importFrom("limma",arrayWeights, asMatrixWeights, camera, contrastAsCoef,
+           decideTests, duplicateCorrelation, fry, goana, kegga, is.fullrank,
+           logsumexp, lmFit, loessFit, mroast, nonEstimable,
+           normalizeBetweenArrays, plotMD, plotMDS, plotWithHighlights,
+           removeExt, roast, romer, squeezeVar, subsetListOfArrays,
+           weightedLowess, zscoreGamma, zscoreT)
+importClassesFrom("limma","LargeDataObject","Roast","MDS","TestResults")
+importFrom("locfit", locfit)
+importFrom("Rcpp", sourceCpp)
+
+S3method(Ops,CompressedMatrix)
+S3method("[",CompressedMatrix)
+S3method("[<-",CompressedMatrix)
+S3method(as.matrix,CompressedMatrix)
+S3method(aveLogCPM,default)
+S3method(aveLogCPM,DGEList)
+S3method(aveLogCPM,DGEGLM)
+S3method(aveLogCPM,SummarizedExperiment)
+S3method(cbind,CompressedMatrix)
+S3method(dim,CompressedMatrix)
+S3method(estimateGLMCommonDisp,default)
+S3method(estimateGLMCommonDisp,DGEList)
+S3method(estimateGLMTagwiseDisp,default)
+S3method(estimateGLMTagwiseDisp,DGEList)
+S3method(glmFit,default)
+S3method(glmFit,DGEList)
+S3method(glmFit,SummarizedExperiment)
+S3method(length,CompressedMatrix)
+S3method(predFC,default)
+S3method(predFC,DGEList)
+S3method(predFC,SummarizedExperiment)
+S3method(rbind,CompressedMatrix)

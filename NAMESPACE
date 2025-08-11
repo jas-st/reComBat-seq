@@ -1,5 +1,5 @@
 #  Calling the dynamic library.
-useDynLib(reComBat_seq, .registration=TRUE, .fixes=".cxx_")
+useDynLib(reComBatseq, .registration=TRUE, .fixes=".cxx_")
 
 #  All functions exported other than those starting with "."
 exportPattern("^[^\\.]")

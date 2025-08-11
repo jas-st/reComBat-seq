@@ -10,6 +10,8 @@
 #' @param shrink Boolean, whether to apply empirical Bayes estimation on parameters
 #' @param shrink.disp Boolean, whether to apply empirical Bayes estimation on dispersion
 #' @param gene.subset.n Number of genes to use in empirical Bayes estimation, only useful when shrink = TRUE
+#' @param lambda_reg Regularization strength
+#' @param alpha_reg Elastic Net Tuner, 1 for pure LASSO, 0 for pure ridge
 #' @return data A probe x sample count matrix, adjusted for batch effects.
 #'
 #' @examples

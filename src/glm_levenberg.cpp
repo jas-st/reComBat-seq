@@ -94,6 +94,7 @@ int glm_levenberg::fit(const double* y, const double* offset, const double* disp
       //alpha - controls (ridge/lasso); 0 - ridge, 1 - lasso
 
         compute_xtwx(nlibs, ncoefs, design, working_weights.data(), xtwx.data());
+      // regularization penalty - second derivative
       for (int col = 0; col < ncoefs; ++col) {
         xtwx[col * ncoefs + col] += lambda_reg*(1-alpha_reg);
       }
@@ -102,6 +103,7 @@ int glm_levenberg::fit(const double* y, const double* offset, const double* disp
         auto xtwxIt=xtwx.begin();
         for (int coef=0; coef<ncoefs; ++coef, dcopy+=nlibs, xtwxIt+=ncoefs) {
             dl[coef]=std::inner_product(deriv.begin(), deriv.end(), dcopy, 0.0);
+          // regularization penalty - first derivative
             dl[coef]-=lambda_reg*(alpha_reg * std::copysign(1.0, beta[coef]) + (1-alpha_reg)*beta[coef]);
             const double& cur_val=*(xtwxIt+coef);
             if (cur_val>max_info) { max_info=cur_val; }

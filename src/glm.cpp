@@ -44,7 +44,7 @@ std::pair<double,bool> glm_one_group(int nlibs, const double* counts, const doub
         return std::make_pair(R_NegInf, true);
     }
 
-  //double alpha = 0.5; // balance between L1 and L2 (0 = only L2, 1 = only L1)
+  //double alpha = 0.5; // balance between LASSO and ridge (0 = only ridge, 1 = only LASSO)
   //double lambda = 1; // regularization strength
 
 	// Newton-Raphson iterations to converge to mean.
@@ -58,7 +58,7 @@ std::pair<double,bool> glm_one_group(int nlibs, const double* counts, const doub
 			info+=mu/denominator * weights[j];
 		}
 
-		// penalty
+		// regularization penalty
 	  dl-=lambda_reg * (alpha_reg * get_sign(cur_beta) + (1 - alpha_reg) * cur_beta);
 		info+=lambda_reg * (1 - alpha_reg);
 

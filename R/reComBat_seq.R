@@ -1,6 +1,6 @@
 #' Adjust for batch effects using an empirical Bayes framework in RNA-seq raw counts
 #'
-#' ComBat_seq is an extension to the ComBat method using Negative Binomial model.
+#' reComBat_seq is an extension to the ComBat_seq method using regularized Negative Binomial model.
 #'
 #' @param counts Raw count matrix from genomic studies (dimensions gene x sample)
 #' @param batch Batch covariate (only one batch allowed)
@@ -19,7 +19,7 @@
 #' @export
 #'
 
-ComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
+reComBat_seq <- function(counts, batch, group=NULL, covar_mod=NULL, full_mod=TRUE,
                        shrink=FALSE, shrink.disp=FALSE, gene.subset.n=NULL,
                        lambda_reg=0, alpha_reg=0){
   ########  Preparation  ########

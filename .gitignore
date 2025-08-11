@@ -1,4 +1,8 @@
 .Rproj.user
+reComBat_seq.Rproj
+.DS_Store
 .Rhistory
 .RData
 .Ruserdata
+src/*.so
+src/*.o

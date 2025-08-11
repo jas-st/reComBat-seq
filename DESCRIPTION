@@ -1,12 +1,11 @@
-Package: recombatseqv2
+Package: reComBat_seq
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Regularized RNA-seq Batch Correction
 Version: 1.0
-Date: 2024-08-28
-Author: Your Name
+Date: 2025-08-11
+Author: Zhasmina Stoyanova
 Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more full
-         sentences.
+Description: Extends the ComBat-seq method using regularized negative binomial regression.
 License: GPL (>= 2)
 Depends: R (>= 3.6.0), limma (>= 3.41.5)
 Imports: methods, graphics, stats, utils, locfit, Rcpp (>= 1.0.13)

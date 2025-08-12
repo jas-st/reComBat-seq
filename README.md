@@ -33,7 +33,7 @@ recombatseq_df <- reComBat_seq(counts_df_reduced, batch = batches, group = group
 | ------------- | -------------  |
 | <img src="https://github.com/jas-st/reComBat-seq/blob/main/tutorial/PCA_raw.png" width="500">  | <img src="https://github.com/jas-st/reComBat-seq/blob/main/tutorial/PCA_corrected.png" width="500">   |
   
-For multiple biological variables the `covar_mod` parameter can be used. In this scenario the confounded matrix from the tutorial will be used.
+For multiple biological variables the `covar_mod` parameter can be used. In this example the matrix from the tutorial will be used.
 
 ```r
 recombatseq_df_conf <- reComBat_seq(counts_df_reduced, batch = batches, covar_mod = covmat_model,
@@ -46,7 +46,12 @@ recombatseq_df_conf <- reComBat_seq(counts_df_reduced, batch = batches, covar_mo
 
 ## Arguments
 
-Since reComBat-seq follows the same structure as ComBat-seq, the parameters used are also the same. The regularization can be adjusted via the following parameters:
+  - `counts` - raw count matrix from genomic studies (dimensions gene x sample)
+  - `batch` - batch covariate (only one vector allowed)
+  - `group` - vector / factor for condition of interest
+  - `covar_mod` - model matrix for other covariates to include in linear model besides batch and condition of interest
+
+The regularization can be adjusted via the following parameters:
 
   - `lambda_reg` - controls the strength of the regularization, $\lambda$ in the above equation
   - `alpha_reg` - controls the elastic net tuning, $\alpha$ in the above equation

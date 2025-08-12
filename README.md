@@ -46,7 +46,7 @@ recombatseq_df_conf <- reComBat_seq(counts_df_reduced, batch = batches, covar_mo
 
 ## Arguments
 
-Since reComBat-seq follows the same structure as ComBat-seq, the parameters used are also the same. The regularization parameters added are the following:
+Since reComBat-seq follows the same structure as ComBat-seq, the parameters used are also the same. The regularization can be adjusted via the following parameters:
 
   - `lambda_reg` - controls the strength of the regularization, $\lambda$ in the above equation
   - `alpha_reg` - controls the elastic net tuning, $\alpha$ in the above equation

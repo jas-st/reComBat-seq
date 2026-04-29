@@ -12,20 +12,19 @@
 #endif
 
 // THESE MUST BE AT THE TOP LEVEL (GLOBAL SCOPE)
-extern "C" {
-    int openblas_get_num_threads(void) __attribute__((weak));
-    void openblas_set_num_threads(int num_threads) __attribute__((weak));
-}
+//extern "C" {
+//    int openblas_get_num_threads(void) __attribute__((weak));
+//    void openblas_set_num_threads(int num_threads) __attribute__((weak));
+//}
 
 SEXP fit_levenberg (SEXP y, SEXP offset, SEXP disp, SEXP weights, SEXP design,
                     SEXP beta, SEXP tol, SEXP maxit, SEXP lambda_reg, SEXP alpha_reg,
                     SEXP num_threads) {
     BEGIN_RCPP
      
-    Rprintf("test");
     // OPENBLAS DEBUG
-    if (openblas_get_num_threads) {
-      Rprintf("Inside C++, OpenBLAS is using %d threads.\n", openblas_get_num_threads()); }
+    //if (openblas_get_num_threads) {
+    //  Rprintf("Inside C++, OpenBLAS is using %d threads.\n", openblas_get_num_threads()); }
     
  
     any_numeric_matrix counts(y);
@@ -67,10 +66,10 @@ SEXP fit_levenberg (SEXP y, SEXP offset, SEXP disp, SEXP weights, SEXP design,
     #ifdef _OPENMP
         if (n_threads > 0) {
 
-          if (openblas_set_num_threads) {
-              openblas_set_num_threads(1);
-              Rprintf("Inside C++, OpenBLAS is using %d threads after the command.\n", openblas_get_num_threads());
-          }
+          //if (openblas_set_num_threads) {
+           //   openblas_set_num_threads(1);
+           //   Rprintf("Inside C++, OpenBLAS is using %d threads after the command.\n", openblas_get_num_threads());
+          //}
 
           omp_set_num_threads(n_threads);
           //std::cout << "Max threads available: " << omp_get_max_threads() << std::endl;

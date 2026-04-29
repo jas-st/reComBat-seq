@@ -15,7 +15,14 @@ SEXP fit_levenberg (SEXP y, SEXP offset, SEXP disp, SEXP weights, SEXP design,
                     SEXP beta, SEXP tol, SEXP maxit, SEXP lambda_reg, SEXP alpha_reg,
                     SEXP num_threads) {
     BEGIN_RCPP
+     
+    // OPENBLAS DEBUG
+    extern "C" int openblas_get_num_threads(void);
+    Rprintf("Inside C++, OpenBLAS is using %d threads.\n", openblas_get_num_threads());
 
+    extern "C" { void openblas_set_num_threads(int num_threads) __attribute__((weak)); }
+    
+ 
     any_numeric_matrix counts(y);
     const int num_tags=counts.get_nrow();
     const int num_libs=counts.get_ncol();
@@ -54,6 +61,12 @@ SEXP fit_levenberg (SEXP y, SEXP offset, SEXP disp, SEXP weights, SEXP design,
     //PARALLEL
     #ifdef _OPENMP
         if (n_threads > 0) {
+
+          if (openblas_set_num_threads) {
+              openblas_set_num_threads(1);
+              Rprintf("Inside C++, OpenBLAS is using %d threads after the command.\n", openblas_get_num_threads());
+          }
+
           omp_set_num_threads(n_threads);
           //std::cout << "Max threads available: " << omp_get_max_threads() << std::endl;
           Rprintf("Max threads available: %d\n", omp_get_max_threads());

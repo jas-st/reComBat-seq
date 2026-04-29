@@ -22,6 +22,7 @@ SEXP fit_levenberg (SEXP y, SEXP offset, SEXP disp, SEXP weights, SEXP design,
                     SEXP num_threads) {
     BEGIN_RCPP
      
+    Rprintf("test");
     // OPENBLAS DEBUG
     if (openblas_get_num_threads) {
       Rprintf("Inside C++, OpenBLAS is using %d threads.\n", openblas_get_num_threads()); }

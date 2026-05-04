@@ -26,10 +26,12 @@ mglmLevenberg <- function(y, design, dispersion=0, offset=0, weights=NULL,
       RhpcBLASctl::blas_set_num_threads(old_blas_threads)
     }, add = TRUE)
     
-      message(sprintf("Parallel check: Throttling BLAS (%d -> 1) for %d OpenMP threads", 
-                      old_blas_threads, num_threads))
+    message(
+		paste("Parallel check: Throttling BLAS (%d -> 1) for %d OpenMP threads", old_blas_threads, num_threads)
+	)
+	omp_set_num_threads(num_threads)
 
-
+      
 #	Check arguments
 	y <- as.matrix(y)
 	if(!is.numeric(y)) stop("y is non-numeric")

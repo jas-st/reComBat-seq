@@ -15,21 +15,23 @@ mglmLevenberg <- function(y, design, dispersion=0, offset=0, weights=NULL,
 {
 
 # Save current state to restore it later
-    old_blas_threads <- RhpcBLASctl::blas_get_num_procs()
-    
-    # FORCE BLAS TO 1 THREAD
-    # This prevents the "OpenBLAS loop failed" error on compute nodes
-    RhpcBLASctl::blas_set_num_threads(1)
-    
-    # Ensure threads are reset even if the C++ code throws an error or user hits 'Esc'
-    on.exit({
-      RhpcBLASctl::blas_set_num_threads(old_blas_threads)
-    }, add = TRUE)
-    
-    message(
-		paste("Parallel check: Throttling BLAS (%d -> 1) for %d OpenMP threads", old_blas_threads, num_threads)
-	)
-	omp_set_num_threads(num_threads)
+	if(num_threads) {
+	    old_blas_threads <- RhpcBLASctl::blas_get_num_procs()
+	    
+	    # FORCE BLAS TO 1 THREAD
+	    # This prevents the "OpenBLAS loop failed" error on compute nodes
+	    RhpcBLASctl::blas_set_num_threads(1)
+	    
+	    # Ensure threads are reset even if the C++ code throws an error or user hits 'Esc'
+	    on.exit({
+	      RhpcBLASctl::blas_set_num_threads(old_blas_threads)
+	    }, add = TRUE)
+	    
+	    message(
+			paste("Parallel check: Throttling BLAS (%d -> 1) for %d OpenMP threads", old_blas_threads, num_threads)
+		)
+		omp_set_num_threads(num_threads)
+	}
 
       
 #	Check arguments

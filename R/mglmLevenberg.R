@@ -28,7 +28,7 @@ mglmLevenberg <- function(y, design, dispersion=0, offset=0, weights=NULL,
 	    }, add = TRUE)
 	    
 	    message(
-			paste("Parallel check: Throttling BLAS (%d -> 1) for %d OpenMP threads", old_blas_threads, num_threads)
+			sprintf("Parallel check: Throttling BLAS (%d -> 1) for %d OpenMP threads", old_blas_threads, num_threads)
 		)
 		omp_set_num_threads(num_threads)
 	}
